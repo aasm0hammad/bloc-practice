@@ -1,15 +1,19 @@
 import 'package:bloc_practice/bloc/counter_bloc.dart';
 import 'package:bloc_practice/bloc/counter_event.dart';
+import 'package:bloc_practice/db/db_helper.dart';
 import 'package:bloc_practice/list_bloc/list_bloc.dart';
+import 'package:bloc_practice/list_bloc_db/list_bloc_db.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 
 import 'home_page.dart';
 
 void main() {
-  runApp(BlocProvider(
-    create: (context) => ListBloc(),
-    child: MyApp(),
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (context)=>ListBlocDB(dbHelper: DbHelper.getInstance())),
+    BlocProvider(create: (context) => ListBloc()),
+  ], child: MyApp(),
   ));
 }
 

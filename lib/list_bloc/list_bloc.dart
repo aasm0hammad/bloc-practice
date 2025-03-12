@@ -13,14 +13,10 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     });
 
     /// Update List Item
-    on<UpdateItemList>((
-      event,
-      emit,
-    ) {
+    on<UpdateItemList>((event, emit) {
       List<Map<String, dynamic>> updatedItem = state.mData;
 
       updatedItem[event.index] = event.updateValue;
-
       emit(ListState(mData: updatedItem));
     });
 
